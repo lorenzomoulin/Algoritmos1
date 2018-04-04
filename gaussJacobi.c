@@ -41,24 +41,16 @@ float* resolve (float** A, float* b){
 			xNovo[i] = (b[i] - Soma)/A[i][i];
 		}
 		
-		//for (int i = 0; i < n; i++)
-			//printf("| %f |\n", xAnt[i]);
-		
 		if ((mod(norm(xAnt) - norm(xNovo)) < err))
 			continuar = 0;
 		
 		else
 			for (int i = 0; i < n; i++)
 				xAnt[i] = xNovo[i];
-			
-		//for (int i = 0; i < n; i++)
-			//printf("| %f |\n", xAnt[i]);
-			
+				
 		num++;
 	}
-	//for (int i = 0; i < n; i++)
-		//printf("| %f |\n", xAnt[i]);
-	//free(xAnt);
+	free(xNovo);
 	return xAnt;
 } 
 
@@ -97,6 +89,11 @@ int main(){
 	float* vetorSolucao = resolve(A,b);
 	for (int i = 0; i < n; i++)
 		printf("| %f |\n", vetorSolucao[i]);
+	for (int i = 0; i < n; i++)
+		free(A[i]);
+	free(A);
+	free(vetorSolucao);
+	free(b);
 	
 	return 0;
 }
